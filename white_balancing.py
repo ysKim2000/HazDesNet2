@@ -4,7 +4,7 @@ import numpy as np
 from skimage import morphology
 
 I_DIR = './images/mrfid'
-O_DIR = './wb_result'
+O_DIR = './wb_result/'
 
 def white_balancing(img):
     res = img
@@ -21,18 +21,19 @@ def white_balancing(img):
             final[x, y, 2] = b - ((avg_b - 128) * (l / 100.0) * 1.1)
     
     final = cv2.cvtColor(final, cv2.COLOR_LAB2BGR)
-    final = np.hstack((res, final))
+    # 두개 같이 병합해서 나오기 
+    # final = np.hstack((res, final))
     
     return final
 
 
 def files(dir=I_DIR):
     names = os.listdir(dir)
-
+    # 정렬화
+    names.sort()
     for name in names:
         print(name)
         I = cv2.imread(os.path.join(dir, name))
-        # result = cv2.xphoto.createSimpleWB().balanceWhite(I)
         result = white_balancing(I)
         name = name.split('.')[0]
         cv2.imwrite(os.path.join(O_DIR, f'{name}.jpg'), result)
