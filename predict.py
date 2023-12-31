@@ -56,7 +56,7 @@ def main():
 
     # 이미지 폴더에서 모든 이미지 파일 목록을 가져옴
     image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp'))]
-
+    print(image_files)
     # 각 이미지에 대한 des_score를 저장할 리스트
     des_scores = []
 
